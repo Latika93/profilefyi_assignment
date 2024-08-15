@@ -1,5 +1,5 @@
 import { connect } from "../../../dbconfig/dbconfig"
-import Cart from "../../../../models/cart"; 
+import Cart from "../../../models/cartModel"
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 

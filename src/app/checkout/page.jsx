@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
-const CheckoutForm = ({ onSubmit }) => {
+const CheckoutForm = () => {
     const [formData, setFormData] = useState({
         fullName: '',
         address: '',

@@ -1,5 +1,4 @@
 import { connect } from "../../../../dbconfig/dbconfig"
-import mongoose from "mongoose";
 import User from "../../../../models/user"
 import { NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";

@@ -1,5 +1,5 @@
-import { connect } from "../../../dbconfig/dbconfig"
-import Cart from "../../../models/cartModel"
+import { connect } from "../../../dbconfig/dbconfig";
+import { Cart, Products } from "../../../models/cartModel";
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 
@@ -17,13 +17,18 @@ export async function GET(request) {
         const decoded = jwt.verify(token, JWT_SECRET);
         if (typeof decoded === 'object' && 'id' in decoded) {
             const userId = decoded.id;
-            const cart = await Cart.findOne({ user: userId }).populate('products.productId');
-            return NextResponse.json({ cart: cart ? cart.products : [] });
+            console.log("userId: " + userId);
+            
+            const cart = await Cart.findOne({ user: userId });
+            return NextResponse.json({ cart: cart ? cart.products : [] }, { status: 200 });
+        } else {
+            return NextResponse.json({ error: "Invalid token" }, { status: 401 });
         }
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
+
 
 export async function POST(request) {
     try {
@@ -35,6 +40,7 @@ export async function POST(request) {
         const decoded = jwt.verify(token, JWT_SECRET);
         if (typeof decoded === 'object' && 'id' in decoded) {
             const userId = decoded.id;
+
             const { cart } = await request.json();
 
             let existingCart = await Cart.findOne({ user: userId });
@@ -45,7 +51,7 @@ export async function POST(request) {
                 await Cart.create({ user: userId, products: cart });
             }
 
-            return NextResponse.json({ success: true });
+            return NextResponse.json({ success: true }, { status: 200 });
         } else {
             return NextResponse.json({ error: "Invalid token" }, { status: 401 });
         }

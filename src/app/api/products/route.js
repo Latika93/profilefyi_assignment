@@ -1,8 +1,6 @@
 import { connect } from '../../../dbconfig/dbconfig';
-import Products from "../../../models/product"
-import mongoose from 'mongoose';
-// const Products = mongoose.model('Products')
-import { NextRequest, NextResponse } from "next/server";
+import { Products } from '../../../models/cartModel'
+import { NextResponse } from "next/server";
 
 connect()
 

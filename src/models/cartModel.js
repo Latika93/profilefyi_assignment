@@ -1,42 +1,28 @@
-// import mongoose from 'mongoose';
-
-// const cartSchema = new mongoose.Schema({
-//     image: {
-//         type: String,
-//         required: true,
-//     },
-//     name: {
-//         type: String,
-//     },
-//     price: {
-//         type: Number,
-//         required: true,
-//     },
-//     quantity: {
-//         type: Number,
-//     },
-//     user: {
-//         type: mongoose.Schema.Types.ObjectId,
-//         ref: 'User',
-//         required: true,
-//     },
-// }, {
-//     timestamps: true,
-// });
-
-// const Cart = mongoose.models.Cart || mongoose.model('Cart', cartSchema);
-// export default Cart;
-
 import mongoose from "mongoose";
 
+const productSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    price: { type: Number, required: true },
+    description: { type: String },
+    image: { type: String }
+});
+
+const Products = mongoose.models.Products || mongoose.model('Products', productSchema);
+
 const CartSchema = new mongoose.Schema({
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'users', required: true },
     products: [
         {
-            productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
-            quantity: { type: Number, default: 1 },
+            name: { type: String, required: true },
+            price: { type: Number, required: true },
+            description: { type: String },
+            image: { type: String },
+            quantity: { type: Number, default: 1 }
         }
     ]
 });
 
-export default mongoose.models.Cart || mongoose.model("Cart", CartSchema);
+const Cart = mongoose.models.Cart || mongoose.model("Cart", CartSchema);
+
+
+export { Products, Cart };

@@ -1,7 +1,5 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { GlobalProvider } from "./GlobalProvider";
-import Link from 'next/link';
 import { CartProvider } from "../context/cartContext";
 
 
@@ -18,12 +16,6 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <CartProvider>
-          {/* <header className="bg-gray-800 p-4 text-white">
-            <nav>
-              <Link href="/">Home</Link> |{" "}
-              <Link href="/cart">Cart  </Link>
-            </nav>
-          </header> */}
           {children}
         </CartProvider>
       </body>
